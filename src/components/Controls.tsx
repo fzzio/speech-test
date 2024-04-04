@@ -11,11 +11,27 @@ export const Controls = ({
   play,
   pause,
   loadNewContent,
+  state,
 }: {
   play: () => void;
   pause: () => void;
   loadNewContent: () => void;
   state: PlayingState;
 }) => {
-  return <div></div>;
+  return (
+    <div data-testid="controls">
+      {state === 'playing' ? (
+        <button onClick={pause} data-testid="pause-button">
+          Pause
+        </button>
+      ) : (
+        <button onClick={play} data-testid="play-button">
+          Play
+        </button>
+      )}
+      <button onClick={loadNewContent} data-testid="load-new-content-button">
+        Load new content
+      </button>
+    </div>
+  );
 };

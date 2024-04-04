@@ -16,5 +16,32 @@ export const CurrentlyReading = ({
   currentSentenceIdx: number;
   sentences: string[];
 }) => {
-  return <div data-testid="currently-reading"></div>;
+  return (
+    <div data-testid="currently-reading">
+      <div>
+        {sentences.map((sentence, idx) => (
+          <p key={idx} data-testid="current-sentence">
+            {idx === currentSentenceIdx ? (
+              <>
+                {sentence.split(" ").map((word, wordIdx) => (
+                  <span
+                    key={wordIdx}
+                    data-testid="current-word"
+                    style={{
+                      backgroundColor:
+                        wordIdx >= currentWordRange[0] && wordIdx <= currentWordRange[1]
+                          ? "yellow"
+                          : "transparent",
+                    }}
+                  >
+                    {word}
+                  </span>
+                ))}
+              </>
+            ) : null}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
 };
