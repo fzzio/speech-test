@@ -22,9 +22,14 @@ const fetchContent = async (url = API_URL): Promise<string> => {
 const parseContentIntoSentences = (content: string) => {
   const parsedContent = content.match(/<[^>]+>[^<]*<\/[^>]+>/g);
 
-  return parsedContent?.map((dirtyPhrase) => {
-    return dirtyPhrase.replace(/(<([^>]+)>)/ig, '');
-  })
+  if (parsedContent) {
+    return parsedContent.map((dirtyPhrase) => {
+      return dirtyPhrase.replace(/(<([^>]+)>)/ig, '');
+    })
+  } else {
+    throw new Error("This is not valid ssml");
+  }
+
 };
 
 export { fetchContent, parseContentIntoSentences };
