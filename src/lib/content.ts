@@ -19,6 +19,12 @@ const fetchContent = async (url = API_URL): Promise<string> => {
  * Parse the content into sentences, and return an array of sentences. Look at the Readme for sample input and expected output.
  * Avoid using DOMParser for implementing this function.
  */
-const parseContentIntoSentences = (content: string) => {};
+const parseContentIntoSentences = (content: string) => {
+  const parsedContent = content.match(/<[^>]+>[^<]*<\/[^>]+>/g);
+
+  return parsedContent?.map((dirtyPhrase) => {
+    return dirtyPhrase.replace(/(<([^>]+)>)/ig, '');
+  })
+};
 
 export { fetchContent, parseContentIntoSentences };
