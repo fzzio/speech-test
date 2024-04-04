@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { PlayingState, createSpeechEngine, SpeechEngine } from './speech';
+import { s } from 'vitest/dist/reporters-LLiOBu3g';
 
 /*
   @description
@@ -43,18 +44,21 @@ const useSpeech = (sentences: Array<string>) => {
     if (speechEngine && sentences[currentSentenceIdx]) {
       speechEngine.load(sentences[currentSentenceIdx]);
       speechEngine.play();
+      setPlaybackState("playing");
     }
   }, [currentSentenceIdx, sentences]);
 
   const play = () => {
     if (speechEngine) {
-      speechEngine.play;
+      speechEngine.play();
+      setPlaybackState("playing");
     }
   };
 
   const pause = () => {
     if (speechEngine) {
       speechEngine.pause();
+      setPlaybackState("paused");
     }
   };
 
